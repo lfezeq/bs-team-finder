@@ -1,0 +1,126 @@
+body {
+  margin: 0;
+  font-family: system-ui, Arial;
+  background: #050816;
+  overflow: hidden;
+}
+
+/* BACKGROUND */
+.bg {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* GLASS CARD */
+.glass {
+  width: 380px;
+  padding: 30px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  color: white;
+  z-index: 2;
+}
+
+/* BADGE */
+.badge {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #38bdf8;
+  margin-bottom: 10px;
+}
+
+/* TITLE */
+.title {
+  font-size: 34px;
+  margin: 10px 0;
+}
+
+.title span {
+  color: #22c55e;
+}
+
+/* SUBTITLE */
+.subtitle {
+  font-size: 14px;
+  color: #94a3b8;
+  margin-bottom: 20px;
+}
+
+/* BUTTONS */
+.buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.btn {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: #1e293b;
+  color: white;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+.primary {
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+}
+
+/* FOOTER */
+.footer {
+  margin-top: 15px;
+  font-size: 11px;
+  color: #64748b;
+}
+
+/* GLOW EFFECTS */
+.glow {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  filter: blur(80px);
+  opacity: 0.4;
+  border-radius: 50%;
+}
+
+.glow1 {
+  background: #22c55e;
+  top: 20%;
+  left: 30%;
+}
+
+.glow2 {
+  background: #38bdf8;
+  bottom: 20%;
+  right: 30%;
+}
+.input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: #0b1220;
+  color: white;
+}
+
+.remember {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 12px;
+  color: #94a3b8;
+}
