@@ -2,12 +2,18 @@ import { useState } from "react"
 import Home from "./Home"
 import Play from "./Play"
 import Info from "./Info"
+import OnlineUsers from "./OnlineUsers"
+import "./App.css"
 
 export default function App() {
   const [page, setPage] = useState("home")
 
-  if (page === "play") return <Play go={setPage} />
-  if (page === "info") return <Info go={setPage} />
+  return (
+    <>
 
-  return <Home go={setPage} />
+      {page === "home" && <Home go={setPage} />}
+      {page === "play" && <Play go={setPage} />}
+      {page === "info" && <Info go={setPage} />}
+    </>
+  )
 }

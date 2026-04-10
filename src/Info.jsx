@@ -1,36 +1,37 @@
 export default function Info({ go }) {
   return (
-    <div className="bg">
+    <div className="bg animatedBg">
+
+      <div className="particles">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+
       <div className="glass">
+
         <div className="badge">ABOUT PROJECT</div>
 
         <h1 className="title">How it works</h1>
 
         <p className="subtitle">
-          This is a skill-based matchmaking concept inspired by competitive games.
+          Skill-based matchmaking system inspired by competitive games.
         </p>
 
-        <div className="infoBox">
-          <div className="infoItem">
-            🎯 Match players by elo
-          </div>
+        <p className="subtitle">
+          🎯 Match players by ELO<br />
+          ⚡ Fast queue system<br />
+          🎮 Competitive ranked flow
+        </p>
 
-          <div className="infoItem">
-            ⚡ Fast queue system
-          </div>
+        <p className="subtitle">
+          No accounts • instant access • prototype system
+        </p>
 
-          <div className="infoItem">
-            🎮 Built for rankeds
-          </div>
+        <div className="buttons">
+          <button className="btn primary" onClick={() => go("home")}>
+            BACK
+          </button>
         </div>
 
-        <p className="smallText">
-          No accounts required • instant access • demo project
-        </p>
-
-        <button className="btn primary" onClick={() => go("home")}>
-          Back
-        </button>
       </div>
     </div>
   )
