@@ -1,67 +1,13 @@
-import { useEffect, useState } from "react"
-import "./App.css"
+import { useState } from "react"
+import Home from "./Home"
+import Play from "./Play"
+import Info from "./Info"
 
-function App() {
-  const [email, setEmail] = useState("")
-  const [remember, setRemember] = useState(false)
+export default function App() {
+  const [page, setPage] = useState("home")
 
-  useEffect(() => {
-    const saved = localStorage.getItem("rememberEmail")
-    if (saved) {
-      setEmail(saved)
-      setRemember(true)
-    }
-  }, [])
+  if (page === "play") return <Play go={setPage} />
+  if (page === "info") return <Info go={setPage} />
 
-  const handleLogin = () => {
-    if (remember) {
-      localStorage.setItem("rememberEmail", email)
-    } else {
-      localStorage.removeItem("rememberEmail")
-    }
-  }
-
-  return (
-    <div className="bg">
-      <div className="glass">
-        <div className="badge">BRAWL MATCHMAKING</div>
-
-        <h1 className="title">
-          Welcome back
-        </h1>
-
-        <input
-          className="input"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-
-        <label className="remember">
-          <input
-            type="checkbox"
-            checked={remember}
-            onChange={() => setRemember(!remember)}
-          />
-          Remember me
-        </label>
-
-        <div className="buttons">
-          <button className="btn primary" onClick={handleLogin}>
-            Login
-          </button>
-          <button className="btn">Register</button>
-        </div>
-
-        <div className="footer">
-          beta • powered by Supabase
-        </div>
-      </div>
-
-      <div className="glow glow1" />
-      <div className="glow glow2" />
-    </div>
-  )
+  return <Home go={setPage} />
 }
-
-export default App
