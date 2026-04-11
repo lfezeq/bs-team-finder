@@ -46,36 +46,92 @@ export default function Home({ go }) {
 
       <div className="homeContainer">
 
+        {/* TOP BAR */}
         <div className="topBar">
           <div className="topLeft">
-            <div className="logo">⚡ TEAM FINDER</div>
+            <div className="logo">BS TEAM FINDER</div>
             <div className="onlineBadge">🟢 Users: {online}</div>
           </div>
 
           <button className="miniBtn" onClick={() => go("info")}>
-            ℹ️ Info
+            Info
           </button>
         </div>
 
+        {/* HERO */}
         <div className="hero">
-          <h1 className="heroTitle">🎮 Find your perfect team</h1>
-          <p className="heroSub">✨ {tips[tipIndex]}</p>
+          <h1 className="heroTitle">Find your perfect team</h1>
+          <p className="heroSub">{tips[tipIndex]}</p>
         </div>
 
-        <div className="cardGrid">
-          <div className="card">⚔️ Matchmaking</div>
-          <div className="card">📊 ELO System</div>
-          <div className="card">⚡ Live Queue</div>
+        {/* SYSTEM FEATURES */}
+        <div className="offerSection">
+
+          <div className="offerTitle">SYSTEM FEATURES</div>
+
+          <div className="offerList">
+
+            <div className="offerItem">
+              <span className="dot"></span>
+              <div>
+                <h3>Smart Matchmaking</h3>
+                <p>Find teammates based on skill & performance</p>
+              </div>
+            </div>
+
+            <div className="offerItem">
+              <span className="dot"></span>
+              <div>
+                <h3>ELO Ranking System</h3>
+                <p>Competitive rating that evolves with every match</p>
+              </div>
+            </div>
+
+            <div className="offerItem">
+              <span className="dot"></span>
+              <div>
+                <h3>Live Queue System</h3>
+                <p>Real-time matchmaking lobby with instant updates</p>
+              </div>
+            </div>
+
+            <div className="offerItem">
+              <span className="dot"></span>
+              <div>
+                <h3>Player Stats Tracking</h3>
+                <p>Wins, losses, K/D ratio and performance history</p>
+              </div>
+            </div>
+
+            <div className="offerItem">
+              <span className="dot"></span>
+              <div>
+                <h3>Profile System</h3>
+                <p>Custom player profiles with stats and history</p>
+              </div>
+            </div>
+
+            <div className="offerItem">
+              <span className="dot"></span>
+              <div>
+                <h3>Ranking History</h3>
+                <p>Track progress and climb the competitive ladder</p>
+              </div>
+            </div>
+
+          </div>
         </div>
 
+        {/* ACTION */}
         <div className="actions">
-          <button className="bigBtn" onClick={() => go("play")}>
-            🚀 PLAY
+          <button className="bigBtn" onClick={() => go("lobby")}>
+            PLAY
           </button>
         </div>
 
+        {/* FOOTER */}
         <div className="footer">
-          🧪 Prototype matchmaking system
+          version : beta
         </div>
 
       </div>

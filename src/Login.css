@@ -1,15 +1,14 @@
-.playWrap {
+.loginWrap {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: radial-gradient(circle at top, #111827, #020617);
-  padding: 20px;
+  position: relative;
 }
 
-.playBox {
+.loginBox {
   width: 360px;
-  max-width: 100%;
+  max-width: 90%;
   padding: 25px;
   border-radius: 18px;
   background: rgba(255,255,255,0.05);
@@ -18,20 +17,20 @@
   text-align: center;
 }
 
-.playTitle {
+.loginTitle {
   font-size: 20px;
   margin-bottom: 15px;
   color: #38bdf8;
 }
 
-.playGrid {
+.loginGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
   margin: 15px 0;
 }
 
-.playCard {
+.loginCard {
   padding: 18px;
   border-radius: 14px;
   background: rgba(255,255,255,0.06);
@@ -39,12 +38,12 @@
   transition: 0.2s;
 }
 
-.playCard:hover {
+.loginCard:hover {
   transform: scale(1.05);
   background: rgba(255,255,255,0.12);
 }
 
-.playInput {
+.loginBox input {
   width: 100%;
   margin: 6px 0;
   padding: 10px;
@@ -55,28 +54,19 @@
   color: white;
 }
 
-.playBtnRow {
-  display: flex;
-  gap: 10px;
-  margin-top: 12px;
-}
-
-.playBtn {
-  flex: 1;
+.loginBox button {
+  width: 100%;
+  margin-top: 8px;
   padding: 10px;
   border-radius: 10px;
   border: none;
   cursor: pointer;
   background: #1e293b;
   color: white;
+  transition: 0.2s;
 }
 
-.playBtn.primary {
-  background: #22c55e;
-}
-
-@media (max-width: 600px) {
-  .playGrid {
-    grid-template-columns: 1fr;
-  }
+.loginBox button:hover {
+  transform: translateY(-2px);
+  background: #334155;
 }

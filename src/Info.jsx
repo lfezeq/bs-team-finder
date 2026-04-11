@@ -1,3 +1,4 @@
+import "./App.css"
 export default function Info({ go }) {
   return (
     <div className="bg animatedBg">
