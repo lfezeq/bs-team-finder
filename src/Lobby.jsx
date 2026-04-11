@@ -20,7 +20,6 @@ export default function Lobby({ go, user, setUser }) {
     return () => clearInterval(i)
   }, [])
 
-  // ❌ NIE DOTYKA BAZY
   const logout = () => {
     localStorage.removeItem("user")
     setUser(null)
@@ -65,23 +64,15 @@ export default function Lobby({ go, user, setUser }) {
         <div className="footer">version: beta</div>
       </div>
 
-      {/* MODAL */}
       {showModal && (
         <div className="modalOverlay" onClick={() => setShowModal(false)}>
           <div className="modalBox" onClick={(e) => e.stopPropagation()}>
-
-            <h3>Are you sure you want to log out?</h3>
+            <h3>Are you sure?</h3>
 
             <div className="modalBtns">
-              <button className="btn danger" onClick={logout}>
-                Yes
-              </button>
-
-              <button className="btn" onClick={() => setShowModal(false)}>
-                No
-              </button>
+              <button className="btn danger" onClick={logout}>Yes</button>
+              <button className="btn" onClick={() => setShowModal(false)}>No</button>
             </div>
-
           </div>
         </div>
       )}

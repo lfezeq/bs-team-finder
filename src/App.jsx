@@ -22,21 +22,16 @@ export default function App() {
       localStorage.removeItem("user")
     }
   }, [])
-
   return (
     <>
       {page === "home" && <Home go={setPage} user={user} />}
       {page === "login" && <Login go={setPage} setUser={setUser} />}
-
-      {/* 🔥 PROTECTION FIX */}
       {page === "lobby" && user && (
         <Lobby go={setPage} user={user} setUser={setUser} />
       )}
-
       {page === "lobby" && !user && (
         <Login go={setPage} setUser={setUser} />
       )}
-
       {page === "info" && <Info go={setPage} />}
     </>
   )

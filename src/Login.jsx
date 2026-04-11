@@ -23,11 +23,13 @@ export default function Login({ go, setUser }) {
 
     const { data, error } = await supabase
       .from("users")
-      .insert([{
-        nick: r.n,
-        supercell_id: r.s,
-        password: r.p
-      }])
+      .insert([
+        {
+          nick: r.n,
+          supercell_id: r.s,
+          password: r.p
+        }
+      ])
       .select()
       .single()
 
@@ -40,14 +42,14 @@ export default function Login({ go, setUser }) {
   const login = async () => {
     setError("")
 
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from("users")
       .select("*")
       .eq("nick", l.n)
       .eq("password", l.p)
       .single()
 
-    if (!data) return setError("Wrong login")
+    if (error || !data) return setError("Wrong login")
 
     saveUser(data)
     go("lobby")
@@ -60,11 +62,16 @@ export default function Login({ go, setUser }) {
 
         {!mode && (
           <>
-            <h2 className="loginTitle">LOGIN</h2>
+            <div className="loginTitle">LOGIN</div>
 
             <div className="loginGrid">
-              <div className="loginCard" onClick={() => setMode("l")}>LOGIN</div>
-              <div className="loginCard" onClick={() => setMode("r")}>REGISTER</div>
+              <div className="loginCard" onClick={() => setMode("l")}>
+                LOGIN
+              </div>
+
+              <div className="loginCard" onClick={() => setMode("r")}>
+                REGISTER
+              </div>
             </div>
 
             <button className="loginBtn" onClick={() => go("home")}>
@@ -79,7 +86,7 @@ export default function Login({ go, setUser }) {
           <>
             <input placeholder="Nick" onChange={e => setR({ ...r, n: e.target.value })} />
             <input placeholder="ID" onChange={e => setR({ ...r, s: e.target.value })} />
-            <input type="password" placeholder="Password" onChange={e => setR({ ...r, p: e.target.value })} />
+            <input type="password" placeholder="Pass" onChange={e => setR({ ...r, p: e.target.value })} />
             <input type="password" placeholder="Confirm" onChange={e => setR({ ...r, c: e.target.value })} />
 
             <button onClick={register}>CREATE</button>
@@ -90,7 +97,7 @@ export default function Login({ go, setUser }) {
         {mode === "l" && (
           <>
             <input placeholder="Nick" onChange={e => setL({ ...l, n: e.target.value })} />
-            <input type="password" placeholder="Password" onChange={e => setL({ ...l, p: e.target.value })} />
+            <input type="password" placeholder="Pass" onChange={e => setL({ ...l, p: e.target.value })} />
 
             <button onClick={login}>LOGIN</button>
             <button onClick={() => setMode("")}>BACK</button>
