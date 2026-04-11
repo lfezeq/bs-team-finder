@@ -14,55 +14,59 @@ export default function Home({ go }) {
   const [online, setOnline] = useState(0)
 
   useEffect(() => {
-  const load = async () => {
-    const { count } = await supabase
-      .from("users")
-      .select("*", { count: "exact", head: true })
+    const t = setInterval(() => {
+      setTipIndex((p) => (p + 1) % tips.length)
+    }, 2500)
 
-    setOnline(count || 0)
-  }
-
-  load()
-  const i = setInterval(load, 3000)
-
-  return () => clearInterval(i)
-}, [])
+    return () => clearInterval(t)
+  }, [])
 
   useEffect(() => {
     const load = async () => {
-      const { count } = await supabase
+      const { data, error } = await supabase
         .from("users")
-        .select("*", { count: "exact", head: true })
-        .eq("online", true)
+        .select("id")
 
-      setOnline(count || 0)
+      if (!error) {
+        setOnline(data?.length || 0)
+      }
     }
+
     load()
     const i = setInterval(load, 3000)
+
     return () => clearInterval(i)
   }, [])
+
   return (
     <div className="bg animatedBg">
       <div className="particles">
         <span></span><span></span><span></span><span></span><span></span>
       </div>
+
       <div className="homeContainer">
+
         <div className="topBar">
           <div className="topLeft">
             <div className="logo">BS TEAM FINDER</div>
             <div className="onlineBadge">🟢 Users: {online}</div>
           </div>
+
           <button className="miniBtn" onClick={() => go("info")}>
             Info
           </button>
         </div>
+
         <div className="hero">
           <h1 className="heroTitle">Find your perfect team</h1>
           <p className="heroSub">{tips[tipIndex]}</p>
         </div>
+
         <div className="offerSection">
           <div className="offerTitle">SYSTEM FEATURES</div>
+
           <div className="offerList">
+
             <div className="offerItem">
               <span className="dot"></span>
               <div>
@@ -70,6 +74,7 @@ export default function Home({ go }) {
                 <p>Find teammates based on skill & performance</p>
               </div>
             </div>
+
             <div className="offerItem">
               <span className="dot"></span>
               <div>
@@ -77,6 +82,7 @@ export default function Home({ go }) {
                 <p>Competitive rating that evolves with every match</p>
               </div>
             </div>
+
             <div className="offerItem">
               <span className="dot"></span>
               <div>
@@ -84,6 +90,7 @@ export default function Home({ go }) {
                 <p>Real-time matchmaking lobby with instant updates</p>
               </div>
             </div>
+
             <div className="offerItem">
               <span className="dot"></span>
               <div>
@@ -91,6 +98,7 @@ export default function Home({ go }) {
                 <p>Wins, losses, K/D ratio and performance history</p>
               </div>
             </div>
+
             <div className="offerItem">
               <span className="dot"></span>
               <div>
@@ -98,6 +106,7 @@ export default function Home({ go }) {
                 <p>Custom player profiles with stats and history</p>
               </div>
             </div>
+
             <div className="offerItem">
               <span className="dot"></span>
               <div>
@@ -108,11 +117,13 @@ export default function Home({ go }) {
 
           </div>
         </div>
+
         <div className="actions">
           <button className="bigBtn" onClick={() => go("lobby")}>
             PLAY
           </button>
         </div>
+
         <div className="footer">
           version : beta
         </div>
