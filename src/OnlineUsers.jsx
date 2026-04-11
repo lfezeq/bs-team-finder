@@ -6,7 +6,7 @@ export default function OnlineUsers() {
 
   const load = async () => {
     const { data } = await supabase
-      .from("players")
+      .from("users")
       .select("*")
       .eq("online", true)
 
@@ -23,9 +23,9 @@ export default function OnlineUsers() {
     <div className="onlineBox">
       <h3>Online ({users.length})</h3>
 
-      {users.map((u) => (
+      {users.map(u => (
         <div key={u.id} className="onlineItem">
-          {u.nick} • {u.elo}
+          {u.nick}
         </div>
       ))}
     </div>

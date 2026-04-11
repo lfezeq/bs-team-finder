@@ -23,7 +23,7 @@ export default function Info({ go }) {
         </p>
 
         <p className="subtitle">
-          No accounts • instant access • prototype system
+          fast login • instant access • prototype system
         </p>
 
         <div className="buttons">

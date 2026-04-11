@@ -1,0 +1,82 @@
+.playWrap {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top, #111827, #020617);
+  padding: 20px;
+}
+
+.playBox {
+  width: 360px;
+  max-width: 100%;
+  padding: 25px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+  text-align: center;
+}
+
+.playTitle {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #38bdf8;
+}
+
+.playGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 15px 0;
+}
+
+.playCard {
+  padding: 18px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.06);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.playCard:hover {
+  transform: scale(1.05);
+  background: rgba(255,255,255,0.12);
+}
+
+.playInput {
+  width: 100%;
+  margin: 6px 0;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: #0f172a;
+  color: white;
+}
+
+.playBtnRow {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.playBtn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: #1e293b;
+  color: white;
+}
+
+.playBtn.primary {
+  background: #22c55e;
+}
+
+@media (max-width: 600px) {
+  .playGrid {
+    grid-template-columns: 1fr;
+  }
+}

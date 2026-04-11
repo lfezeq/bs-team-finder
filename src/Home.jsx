@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { supabase } from "./utils/supabase"
-import OnlineUsers from "./OnlineUsers"
+import "./App.css"
 
 const tips = [
   "Match players based on ELO",
@@ -17,20 +17,23 @@ export default function Home({ go }) {
     const t = setInterval(() => {
       setTipIndex((p) => (p + 1) % tips.length)
     }, 2500)
+
     return () => clearInterval(t)
   }, [])
 
   useEffect(() => {
     const load = async () => {
       const { count } = await supabase
-        .from("players")
+        .from("users")
         .select("*", { count: "exact", head: true })
+        .eq("online", true)
 
       setOnline(count || 0)
     }
 
     load()
     const i = setInterval(load, 3000)
+
     return () => clearInterval(i)
   }, [])
 
@@ -46,17 +49,17 @@ export default function Home({ go }) {
         <div className="topBar">
           <div className="topLeft">
             <div className="logo">⚡ TEAM FINDER</div>
-            <div className="onlineBadge">🔴 Online: {online}</div>
+            <div className="onlineBadge">🟢 Users: {online}</div>
           </div>
 
           <button className="miniBtn" onClick={() => go("info")}>
-            Info
+            ℹ️ Info
           </button>
         </div>
 
         <div className="hero">
-          <h1 className="heroTitle">Find your perfect team</h1>
-          <p className="heroSub">{tips[tipIndex]}</p>
+          <h1 className="heroTitle">🎮 Find your perfect team</h1>
+          <p className="heroSub">✨ {tips[tipIndex]}</p>
         </div>
 
         <div className="cardGrid">
@@ -67,12 +70,12 @@ export default function Home({ go }) {
 
         <div className="actions">
           <button className="bigBtn" onClick={() => go("play")}>
-            PLAY
+            🚀 PLAY
           </button>
         </div>
 
         <div className="footer">
-          Prototype matchmaking system
+          🧪 Prototype matchmaking system
         </div>
 
       </div>

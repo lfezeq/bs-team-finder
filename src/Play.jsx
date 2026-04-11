@@ -1,63 +1,118 @@
 import { useState } from "react"
 import { supabase } from "./utils/supabase"
+import "./Play.css"
 
 export default function Play({ go }) {
-  const [form, setForm] = useState({ nick: "", elo: 1000 })
-  const [joined, setJoined] = useState(false)
+  const [mode, setMode] = useState("")
+  const [error, setError] = useState("")
+  const [r, setR] = useState({ n: "", s: "", p: "", c: "" })
+  const [l, setL] = useState({ n: "", p: "" })
 
-  const update = (k, v) => {
-    setForm((p) => ({ ...p, [k]: v }))
+  const reg = async () => {
+    setError("")
+
+    if (r.n.length < 3) return setError("Nick min 3")
+    if (!/^[a-zA-Z0-9]+$/.test(r.s)) return setError("ID only letters/numbers")
+    if (r.p.length < 6) return setError("Password min 6")
+    if (r.p !== r.c) return setError("Passwords not match")
+
+    const { error } = await supabase.from("users").insert([{
+      nick: r.n,
+      supercell_id: r.s,
+      password: r.p,
+      online: true
+    }])
+
+    if (error) return setError(error.message)
+    go("home")
   }
 
-  const join = async () => {
-    if (!form.nick) return
+  const log = async () => {
+    setError("")
 
-    await supabase.from("players").insert({
-      nick: form.nick,
-      elo: Number(form.elo),
-      online: true
-    })
+    const { data } = await supabase
+      .from("users")
+      .select("*")
+      .eq("nick", l.n)
+      .eq("password", l.p)
 
-    setJoined(true)
+    if (!data?.length) return setError("Invalid login")
+
+    await supabase
+      .from("users")
+      .update({ online: true })
+      .eq("nick", l.n)
+
+    go("home")
   }
 
   return (
-    <div className="bg animatedBg">
+    <div className="playWrap">
+      <div className="playBox">
 
-      <div className="particles">
-        <span></span><span></span><span></span><span></span><span></span>
-      </div>
+        {!mode && (
+          <>
+            <div className="playTitle">PLAY MODE</div>
 
-      <div className="glass">
+            <div className="playGrid">
+              <div className="playCard" onClick={() => setMode("l")}>
+                LOGIN
+                <p>I have account</p>
+              </div>
 
-        <div className="badge">PLAYER SETUP</div>
+              <div className="playCard" onClick={() => setMode("r")}>
+                REGISTER
+                <p>I’m new here</p>
+              </div>
+            </div>
 
-        <h1 className="title">Create profile</h1>
+            <button className="playBtn" onClick={() => go("home")}>
+              BACK
+            </button>
+          </>
+        )}
 
-        <input
-          className="input"
-          placeholder="Nickname"
-          value={form.nick}
-          onChange={(e) => update("nick", e.target.value)}
-        />
+        {error && <div style={{ color: "red", marginBottom: 10 }}>{error}</div>}
 
-        <input
-          className="input"
-          type="number"
-          placeholder="ELO"
-          value={form.elo}
-          onChange={(e) => update("elo", e.target.value)}
-        />
+        {mode === "r" && (
+          <>
+            <div className="playTitle">REGISTER</div>
 
-        <div className="buttons">
-          <button className="btn primary" onClick={join}>
-            JOIN
-          </button>
+            <input className="playInput" placeholder="Nick"
+              onChange={e => setR({ ...r, n: e.target.value })} />
 
-          <button className="btn" onClick={() => go("home")}>
-            BACK
-          </button>
-        </div>
+            <input className="playInput" placeholder="Supercell ID"
+              onChange={e => setR({ ...r, s: e.target.value })} />
+
+            <input className="playInput" type="password" placeholder="Password"
+              onChange={e => setR({ ...r, p: e.target.value })} />
+
+            <input className="playInput" type="password" placeholder="Confirm"
+              onChange={e => setR({ ...r, c: e.target.value })} />
+
+            <div className="playBtnRow">
+              <button className="playBtn primary" onClick={reg}>CREATE</button>
+              <button className="playBtn" onClick={() => setMode("")}>BACK</button>
+            </div>
+          </>
+        )}
+
+        {mode === "l" && (
+          <>
+            <div className="playTitle">LOGIN</div>
+
+            <input className="playInput" placeholder="Nick"
+              onChange={e => setL({ ...l, n: e.target.value })} />
+
+            <input className="playInput" type="password" placeholder="Password"
+              onChange={e => setL({ ...l, p: e.target.value })} />
+
+            <div className="playBtnRow">
+              <button className="playBtn primary" onClick={log}>LOGIN</button>
+              <button className="playBtn" onClick={() => setMode("")}>BACK</button>
+            </div>
+          </>
+        )}
 
       </div>
     </div>
